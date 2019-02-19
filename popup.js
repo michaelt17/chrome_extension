@@ -1,4 +1,5 @@
 let changeColor = document.getElementById('changeColor');
+let addButtons = document.getElementById('addButtons');
 
 chrome.storage.sync.get('color', function(data) {
   changeColor.style.backgroundColor = data.color;

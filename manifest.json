@@ -1,7 +1,7 @@
 {
-    "name": "Getting Started Example",
+    "name": "Make Searching Easier",
     "version": "1.0",
-    "description": "Build an Extension!",
+    "description": "Adds to legal database websites",
     "permissions": ["activeTab", "declarativeContent", "storage"],
     "options_page": "options.html",
     "background": {
