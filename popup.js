@@ -16,13 +16,19 @@ changeColor.onclick = function(element) {
   };
 
 addButtons.onclick = function(element) {
-    let bigH1 = document.getElementById('What-are-extensions');
-    let button = document.createElement('button');
-    chrome.extension.getBackgroundPage().console.log(':)');
-    bigH1.appendChild(button);
+  chrome.extension.getBackgroundPage().console.log(':)');
+
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.executeScript(
           tabs[0].id,
-          {code: 'document.body.style.backgroundColor = "' + color + '";'});
+          {file: 'addButtons.js'});
     });
+
+
+    // bigH1.appendChild(button);
+    // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    //   chrome.tabs.executeScript(
+    //       tabs[0].id,
+    //       {code: 'document.body.style.backgroundColor = "' + color + '";'});
+    // });
   };
