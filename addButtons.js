@@ -3,6 +3,19 @@
   let button = document.createElement('BUTTON');
   let buttonNeg = document.createElement('BUTTON');
 
+  // document.addEventListener('DOMContentLoaded', function () {
+  //   let bg = chrome.extension.getBackgroundPage();
+  //   let rows = bg.rows;
+  //   console.log(rows);
+  // });
+
+  let bg = chrome.extension.getBackgroundPage();
+
+  let score = 0;
+  // taken from https://www.taniarascia.com/how-to-use-the-javascript-fetch-api-to-get-json-data/
+  // Replace ./data.json with your JSON feed
+
+
   button.type = "button";
   button.classList.add("positive-button");
 
@@ -12,7 +25,7 @@
   // button.syle.width = "50px";
   // button.syle.height = "50px";
   // button.value = "hatelife";
-  console.log(h2List.length);
+  // console.log(h2List.length);
   for (var i = 0; i < h2List.length; i++){
     tempNode = button.cloneNode();
     tempNode.innerHTML = '+';
@@ -33,7 +46,7 @@
 
     h2List[i].appendChild(tempNode);
     h2List[i].appendChild(tempNodeNeg);
-    console.log(h2List[i].innerHTML);
+    // console.log(h2List[i].innerHTML);
     // h2List[i].innerHTML += button;
   }
 
