@@ -9,7 +9,7 @@
   //   console.log(rows);
   // });
 
-  let bg = chrome.extension.getBackgroundPage();
+  // let bg = chrome.extension.getBackgroundPage();
 
   let score = 0;
   // taken from https://www.taniarascia.com/how-to-use-the-javascript-fetch-api-to-get-json-data/

@@ -4,20 +4,20 @@
 
 'use strict';
 
-let url = "http://gsx2json.com/api?id=1oT9AP2SJ82wvlO9R_WKP6j3ywdXUMhdlbt4_KvX7_gc&sheet=1"
-
-let rows = [];
-
-fetch(url).then(response => {
-  return response.json();
-}).then(data => {
-  // Work with JSON data here
-  // console.log(data['rows']);
-  rows = data['rows'];
-}).catch(err => {
-  console.log(err);
-  // Do something for an error here
-});
+// let url = "http://gsx2json.com/api?id=1oT9AP2SJ82wvlO9R_WKP6j3ywdXUMhdlbt4_KvX7_gc&sheet=1"
+//
+// let rows = [];
+//
+// fetch(url).then(response => {
+//   return response.json();
+// }).then(data => {
+//   // Work with JSON data here
+//   // console.log(data['rows']);
+//   rows = data['rows'];
+// }).catch(err => {
+//   console.log(err);
+//   // Do something for an error here
+// });
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({color: '#3aa757'}, function() {
