@@ -1,7 +1,16 @@
 (function() {
+
+  // chrome.extension.getBackgroundPage().console.log('in addButtons');
+  // chrome.extension.getBackgroundPage().console.log(rows);
+
   let h2List = document.getElementsByClassName('doc-title');
   let button = document.createElement('BUTTON');
   let buttonNeg = document.createElement('BUTTON');
+
+  var node = document.createElement('div');
+
+  // var node = document.createTextNode(rows['score']);
+  // var node = document.createTextNode(rowsScore);
 
   // document.addEventListener('DOMContentLoaded', function () {
   //   let bg = chrome.extension.getBackgroundPage();
@@ -22,6 +31,8 @@
   buttonNeg.type = "button";
   buttonNeg.classList.add("negative-button");
 
+  node.classList.add("button-score");
+
   // button.syle.width = "50px";
   // button.syle.height = "50px";
   // button.value = "hatelife";
@@ -37,15 +48,22 @@
     tempNode.style.float = "right";
 
     tempNodeNeg = buttonNeg.cloneNode();
-    tempNodeNeg.innerHTML = '+';
+    tempNodeNeg.innerHTML = '-';
     tempNodeNeg.style.backgroundColor = "red";
     tempNodeNeg.style.borderRadius = "50%";
     tempNodeNeg.style.width = "50px";
     tempNodeNeg.style.height = "50px";
     tempNodeNeg.style.float = "right";
 
+    tempTextNode = node.cloneNode();
+    tempTextNode.innerHTML = "score:" + score;
+    tempTextNode.style.float = "right";
+    tempTextNode.style.width = "75px";
+    tempTextNode.style.height = "50px";
+
     h2List[i].appendChild(tempNode);
     h2List[i].appendChild(tempNodeNeg);
+    h2List[i].appendChild(tempTextNode);
     // console.log(h2List[i].innerHTML);
     // h2List[i].innerHTML += button;
   }

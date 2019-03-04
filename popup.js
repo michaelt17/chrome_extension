@@ -61,8 +61,13 @@ addButtons.onclick = function(element) {
   chrome.extension.getBackgroundPage().console.log(rows);
   chrome.extension.getBackgroundPage().console.log(':)');
 
+  var holderVal = 19;
+
   if (!buttonsAdded){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      // chrome.tabs.executeScript(
+      //     tabs[0].id,
+      //     code: 'var rowsScore = ' + holderVal,
       chrome.tabs.executeScript(
           tabs[0].id,
           {file: 'addButtons.js'});
