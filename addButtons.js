@@ -7,8 +7,10 @@
   let button = document.createElement('BUTTON');
   let buttonNeg = document.createElement('BUTTON');
 
-  var node = document.createElement('div');
+  let node = document.createElement('div');
 
+  let plusPressed = false;
+  let negPressed = false;
   // var node = document.createTextNode(rows['score']);
   // var node = document.createTextNode(rowsScore);
 
@@ -60,7 +62,7 @@
     tempNodeNeg = buttonNeg.cloneNode();
     tempNodeNeg.setAttribute("id",'buttonNeg'+i);
     tempNodeNeg.innerHTML = '-';
-    tempNodeNeg.style.backgroundColor = "red";
+    tempNodeNeg.style.backgroundColor = "tomato";
     tempNodeNeg.style.borderRadius = "50%";
     tempNodeNeg.style.width = "50px";
     tempNodeNeg.style.height = "50px";
@@ -75,16 +77,50 @@
 
     tempNode.onclick = function(){
       let string = "buttonScore" + i;
-      console.log(string);
+      let buttonString = 'button' + i;
+      // console.log(string);
       let getNode = document.getElementById(string);
       // console.log(getNode.id);
-      getNode.innerHTML = Number(getNode.innerHTML) + 1;
+      if (negPressed){
+        document.getElementById(buttonString).style.backgroundColor = "green";
+        getNode.innerHTML = Number(getNode.innerHTML) + 2;
+        negPressed = false;
+        plusPressed  = true;
+      }
+      else if (!plusPressed) {
+        document.getElementById(buttonString).style.backgroundColor = "green";
+        getNode.innerHTML = Number(getNode.innerHTML) + 1;
+        plusPressed  = true;
+      }
+      else{
+        document.getElementById(buttonString).style.backgroundColor = "lightgreen";
+        getNode.innerHTML = Number(getNode.innerHTML) - 1;
+        plusPressed = false;
+      }
     };
 
     tempNodeNeg.onclick = function(){
-      let getNegNode = document.getElementById("buttonScore" + i);
-      console.log(getNegNode.id);
-      getNegNode.innerHTML = Number(getNegNode.innerHTML) - 1;
+      let string = "buttonScore" + i;
+      let buttonStringNeg = 'buttonNeg' + i;
+      // console.log(string);
+      let getNode = document.getElementById(string);
+      // console.log(getNode.id);
+      if (plusPressed){
+        document.getElementById(buttonStringNeg).style.backgroundColor = "red";
+        getNode.innerHTML = Number(getNode.innerHTML) - 2;
+        negPressed = true;
+        plusPressed = false;
+      }
+      else if (!negPressed) {
+        document.getElementById(buttonStringNeg).style.backgroundColor = "red";
+        getNode.innerHTML = Number(getNode.innerHTML) - 1;
+        negPressed = true;
+      }
+      else{
+        document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
+        getNode.innerHTML = Number(getNode.innerHTML) + 1;
+        negPressed = false;
+      }
     };
 
     h2List[i].appendChild(tempNode);
