@@ -45,7 +45,8 @@
   // button.syle.height = "50px";
   // button.value = "hatelife";
   // console.log(h2List.length);
-  for (var i = 0; i < h2List.length; i++){
+  for (let i = 0; i < h2List.length; i++){
+    console.log(i);
     tempNode = button.cloneNode();
     tempNode.setAttribute("id",'button'+i);
     tempNode.innerHTML = '+';
@@ -66,19 +67,24 @@
     tempNodeNeg.style.float = "right";
 
     tempTextNode = node.cloneNode();
+    tempTextNode.setAttribute("id",'buttonScore' + i);
     tempTextNode.innerHTML = score;
     tempTextNode.style.float = "right";
-    tempTextNode.style.width = "50px";
+    tempTextNode.style.width = "30px";
     tempTextNode.style.height = "20px";
 
     tempNode.onclick = function(){
-      var getNode = document.getElementById("button" + i);
+      let string = "buttonScore" + i;
+      console.log(string);
+      let getNode = document.getElementById(string);
+      // console.log(getNode.id);
       getNode.innerHTML = Number(getNode.innerHTML) + 1;
     };
 
     tempNodeNeg.onclick = function(){
-      var getNode = document.getElementById("buttonNeg" + i);
-      getNode.innerHTML = Number(getNode.innerHTML) - 1;
+      let getNegNode = document.getElementById("buttonScore" + i);
+      console.log(getNegNode.id);
+      getNegNode.innerHTML = Number(getNegNode.innerHTML) - 1;
     };
 
     h2List[i].appendChild(tempNode);
