@@ -1,7 +1,9 @@
 let changeColor = document.getElementById('changeColor');
 let addButtons = document.getElementById('addButtons');
+//let captureSearch = document.getElementById('captureSearch');
 
 let buttonsAdded = false;
+let inputLog = false;
 
 let rows = [];
 
@@ -18,6 +20,12 @@ changeColor.onclick = function(element) {
           {code: 'document.body.style.backgroundColor = "' + color + '";'});
     });
   };
+
+// captureSearch.onclick = function(element) {
+// 	//chrome.extension.getBackgroundPage().console.log('input');
+//   	//const infoDisplay = getElementById('searchTerms');
+//   	//chrome.extension.getBackgroundPage().console.log('infoDisplay');
+//   	};
 
 addButtons.onclick = function(element) {
   let sheetsURL = "http://gsx2json.com/api?id=1oT9AP2SJ82wvlO9R_WKP6j3ywdXUMhdlbt4_KvX7_gc&sheet=1"
@@ -73,7 +81,18 @@ addButtons.onclick = function(element) {
           {file: 'addButtons.js'});
     });
     buttonsAdded = true;
-  }
+  };
+  if (!inputLog){
+    	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      	// chrome.tabs.executeScript(
+      	//     tabs[0].id,
+      	//     code: 'var rowsScore = ' + holderVal,
+      	chrome.tabs.executeScript(
+          	tabs[0].id,
+          	{file: 'content.js'});
+    	});
+    	inputLog = true;
+  	};
 
 
 
@@ -83,4 +102,25 @@ addButtons.onclick = function(element) {
     //       tabs[0].id,
     //       {code: 'document.body.style.backgroundColor = "' + color + '";'});
     // });
-  };
+};
+
+
+  	// document.addEventListener('input', () => {
+  	// 	console.log('input');
+  	// 	const infoDisplay = document.getElementById('searchTerms');
+  	// 	console.log('searchTerms found');
+  	// });
+ //};
+//   document.addEventListener('input', () => {
+//     const infoDisplay = document.getElementById('searchTerms'); 
+//     console.log('searchTerms found');   
+
+//     window.addEventListener('DOMContentLoaded', function () {
+//         chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+//             chrome.tabs.sendMessage(tabs[0].id, {}, function (result) {
+//                 infoDisplay.innerHTML = result
+//             });
+//         });
+//     });
+
+// });
