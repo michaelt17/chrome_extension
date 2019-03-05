@@ -1,5 +1,14 @@
 (function() {
 
+  let score = 0;
+
+  // taken from https://gist.github.com/samjarman/a39e344539a521b428317ff5d2f9cf25
+  chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+      if (request.message == "preach"){ // Filter out other messages
+      alert(request.preachText, 5000);
+    }
+  });
   // chrome.extension.getBackgroundPage().console.log('in addButtons');
   // chrome.extension.getBackgroundPage().console.log(rows);
 
@@ -22,7 +31,6 @@
 
   // let bg = chrome.extension.getBackgroundPage();
 
-  let score = 0;
   // taken from https://www.taniarascia.com/how-to-use-the-javascript-fetch-api-to-get-json-data/
   // Replace ./data.json with your JSON feed
 
