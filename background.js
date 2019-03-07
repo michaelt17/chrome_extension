@@ -4,25 +4,35 @@
 
 'use strict';
 
-// let url = "http://gsx2json.com/api?id=1oT9AP2SJ82wvlO9R_WKP6j3ywdXUMhdlbt4_KvX7_gc&sheet=1"
+
+
+// let config = {
+//   apiKey: "AIzaSyBjJGzI3D2MCHe9HLWwc_bgFCsiHyFEw7s",
+//   databaseURL: "https://chromeextension-4f2a6.firebaseio.com/",
+// };
+// const app = firebase.initializeApp(config);
+// const appDb = app.database();
+// let appDbRef = appDb.ref("searches");
 //
-// let rows = [];
+// let retVal = null;
 //
-// fetch(url).then(response => {
-//   return response.json();
-// }).then(data => {
-//   // Work with JSON data here
-//   // console.log(data['rows']);
-//   rows = data['rows'];
-// }).catch(err => {
-//   console.log(err);
-//   // Do something for an error here
+// appDbRef.on("value", function(snapshot) {
+//   retVal = snapshot.val();
+//   console.log(snapshot.val());
 // });
 
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    console.log(request);
-});
+// taken from https://gist.github.com/samjarman/a39e344539a521b428317ff5d2f9cf25
+// chrome.tabs.query({active: true, currentWindow: true}, function(tabs) { // Fetch the current tab
+//   chrome.extension.getBackgroundPage().console.log('sending data');
+//   chrome.tabs.sendMessage(tabs[0].id, {message: "preach", preachText: retVal});
+//   chrome.extension.getBackgroundPage().console.log('data sent');
+// });
+
+
+// chrome.runtime.onMessage.addListener(
+//   function(request, sender, sendResponse) {
+//     console.log(request);
+// });
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({color: '#3aa757'}, function() {

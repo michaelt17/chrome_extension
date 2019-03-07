@@ -106,8 +106,8 @@ addButtons.onclick = function(element) {
   	// });
  //};
 //   document.addEventListener('input', () => {
-//     const infoDisplay = document.getElementById('searchTerms'); 
-//     console.log('searchTerms found');   
+//     const infoDisplay = document.getElementById('searchTerms');
+//     console.log('searchTerms found');
 
 //     window.addEventListener('DOMContentLoaded', function () {
 //         chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
@@ -118,5 +118,3 @@ addButtons.onclick = function(element) {
 //     });
 
 // });
-
-
