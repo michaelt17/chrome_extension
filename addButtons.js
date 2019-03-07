@@ -1,18 +1,9 @@
 (function() {
-
-  let score = 0;
-
-  // taken from https://gist.github.com/samjarman/a39e344539a521b428317ff5d2f9cf25
-  chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-      if (request.message == "preach"){ // Filter out other messages
-      alert(request.preachText, 5000);
-    }
-  });
-  // chrome.extension.getBackgroundPage().console.log('in addButtons');
-  // chrome.extension.getBackgroundPage().console.log(rows);
+  console.log(passingDataSearches);
+  console.log(passingDataMappings);
 
   let h2List = document.getElementsByClassName('doc-title');
+  let metaList = document.getElementsByClassName('metadata');
   let button = document.createElement('BUTTON');
   let buttonNeg = document.createElement('BUTTON');
 
@@ -20,20 +11,6 @@
 
   let plusPressed = false;
   let negPressed = false;
-  // var node = document.createTextNode(rows['score']);
-  // var node = document.createTextNode(rowsScore);
-
-  // document.addEventListener('DOMContentLoaded', function () {
-  //   let bg = chrome.extension.getBackgroundPage();
-  //   let rows = bg.rows;
-  //   console.log(rows);
-  // });
-
-  // let bg = chrome.extension.getBackgroundPage();
-
-  // taken from https://www.taniarascia.com/how-to-use-the-javascript-fetch-api-to-get-json-data/
-  // Replace ./data.json with your JSON feed
-
 
   button.type = "button";
   button.classList.add("positive-button");
@@ -51,12 +28,29 @@
     console.log("decreasing score");
   };
 
+
+
   // button.syle.width = "50px";
   // button.syle.height = "50px";
   // button.value = "hatelife";
   // console.log(h2List.length);
   for (let i = 0; i < h2List.length; i++){
-    console.log(i);
+  // for (let i = 0; i < 1; i++){     
+    let score = 0;
+
+    // console.log(i);
+    // console.log(metaList[i].childNodes[5].innerHTML);
+    for (let j = 0; j < passingDataMappings.length; j++){
+      // console.log(metaList[i].childNodes[5].innerHTML.replace(/\s/g, ''));
+      // console.log(passingDataMappings[j].replace(/\s/g, ''));
+      if (metaList[i].childNodes[5].innerHTML.replace(/\s/g, '') == passingDataMappings[j].replace(/\s/g, '')){
+        score = passingDataSearches[j]['score'];
+        console.log('we have a match');
+        break;
+      }
+    }
+
+
     tempNode = button.cloneNode();
     tempNode.setAttribute("id",'button'+i);
     tempNode.innerHTML = '+';

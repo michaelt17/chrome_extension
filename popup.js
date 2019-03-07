@@ -4,12 +4,19 @@ let config = {
 };
 const app = firebase.initializeApp(config);
 const appDb = app.database();
-let appDbRef = appDb.ref("searches");
+let appDbRefSearches = appDb.ref("searches");
+let appDbRefMappings = appDb.ref("mappings");
+
 
 let retVal = null;
 
-appDbRef.on("value", function(snapshot) {
+appDbRefSearches.on("value", function(snapshot) {
   retVal = snapshot.val();
+  chrome.extension.getBackgroundPage().console.log(snapshot.val());
+});
+
+appDbRefMappings.on("value", function(snapshot) {
+  retValMappings = snapshot.val();
   chrome.extension.getBackgroundPage().console.log(snapshot.val());
 });
 
@@ -67,56 +74,34 @@ addButtons.onclick = function(element) {
 
   if (!buttonsAdded){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+
       // chrome.tabs.executeScript(
       //     tabs[0].id,
-      //     code: 'var rowsScore = ' + holderVal,
-      chrome.tabs.executeScript(
-          tabs[0].id,
-          {file: 'addButtons.js'});
+      //     {file: 'addButtons.js'});
+
+      var passingDataSearches = retVal;
+      var passingDataMappings = retValMappings;
+      // chrome.extension.getBackgroundPage().console.log(passingData);
+      chrome.tabs.executeScript(tabs[0].id,
+        {code: 'let passingDataSearches = ' + JSON.stringify(passingDataSearches) +';'
+             + 'let passingDataMappings = ' + JSON.stringify(passingDataMappings) +';'
+             + 'let config = ' + JSON.stringify(config) +';'}, function() {
+          chrome.tabs.executeScript(tabs[0].id, {file: 'addButtons.js'});
+      });
+
     });
     buttonsAdded = true;
   };
-  if (!inputLog){
-    	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      	// chrome.tabs.executeScript(
-      	//     tabs[0].id,
-      	//     code: 'var rowsScore = ' + holderVal,
-      	chrome.tabs.executeScript(
-          	tabs[0].id,
-          	{file: 'content.js'});
-    	});
-    	inputLog = true;
-  	};
+  // if (!inputLog){
+  //   	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+  //     	// chrome.tabs.executeScript(
+  //     	//     tabs[0].id,
+  //     	//     code: 'var rowsScore = ' + holderVal,
+  //     	chrome.tabs.executeScript(
+  //         	tabs[0].id,
+  //         	{file: 'content.js'});
+  //   	});
+  //   	inputLog = true;
+  // 	};
 
-
-
-    // bigH1.appendChild(button);
-    // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    //   chrome.tabs.executeScript(
-    //       tabs[0].id,
-    //       {code: 'document.body.style.backgroundColor = "' + color + '";'});
-    // });
 };
-
-
-  	// document.addEventListener('input', () => {
-  	// 	console.log('input');
-  	// 	const infoDisplay = document.getElementById('searchTerms');
-  	// 	console.log('searchTerms found');
-  	// });
- //};
-//   document.addEventListener('input', () => {
-//     const infoDisplay = document.getElementById('searchTerms'); 
-//     console.log('searchTerms found');   
-
-//     window.addEventListener('DOMContentLoaded', function () {
-//         chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-//             chrome.tabs.sendMessage(tabs[0].id, {}, function (result) {
-//                 infoDisplay.innerHTML = result
-//             });
-//         });
-//     });
-
-// });
-
-
