@@ -92,7 +92,12 @@
       else if (!plusPressed) {
         document.getElementById(buttonString).style.backgroundColor = "green";
         getNode.innerHTML = Number(getNode.innerHTML) + 1;
-        plusPressed  = true;
+        for (let z = 0; z < passingDataMappings.length; z++){
+          if (metaList[i].childNodes[5].innerHTML.replace(/\s/g, '') == passingDataMappings[z].replace(/\s/g, '')){
+            passingDataSearches[z]['score'] += 1;
+          }
+          plusPressed  = true;
+        }
       }
       else{
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
@@ -133,7 +138,8 @@
   }
 
   chrome.runtime.sendMessage({
-    package: passingDataSearches
+    package: {searches: passingDataSearches,
+              mappings: passingDataMappings}
   });
-  
+
 })();

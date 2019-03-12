@@ -19,6 +19,13 @@
 //   // Do something for an error here
 // });
 
+// let config = {
+//   apiKey: "AIzaSyBjJGzI3D2MCHe9HLWwc_bgFCsiHyFEw7s",
+//   databaseURL: "https://chromeextension-4f2a6.firebaseio.com/",
+// };
+// const app = firebase.initializeApp(config);
+// const appDb = app.database();
+
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({color: '#3aa757'}, function() {
@@ -35,8 +42,8 @@ chrome.runtime.onInstalled.addListener(function() {
     });
 });
 
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse){
-       console.log(request.package);
-    }
-);
+// chrome.runtime.onMessage.addListener(
+//     function(request, sender, sendResponse){
+//        console.log(request.package);
+//     }
+// );
