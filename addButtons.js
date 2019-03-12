@@ -38,6 +38,7 @@
   // for (let i = 0; i < 1; i++){
     let score = 0;
     let match_val = -1;
+    let hasMatch = false;
 
     // console.log(i);
     // console.log(metaList[i].childNodes[5].innerHTML);
@@ -48,6 +49,7 @@
         //we can use trim here to remove leading whitespace in the innerHTML and compare strings directly instead
         score = passingDataSearches[j]['score'];
         match_val = j;
+        hasMatch = true;
         console.log('we have a match');
         break;
       }
@@ -97,6 +99,7 @@
         getNode.innerHTML = Number(getNode.innerHTML) + 2;
 
         passingDataSearches[match_val]['score'] += 2;
+        sendMsg();
         // negPressed = false;
         // plusPressed  = true;
         getNode.negpress = false;
@@ -122,6 +125,7 @@
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
         getNode.innerHTML = Number(getNode.innerHTML) - 1;
         passingDataSearches[match_val]['score'] -= 1;
+        sendMsg();
         // plusPressed = false;
         getNode.pospress = false;
       }
@@ -142,6 +146,8 @@
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
         getNode.innerHTML = Number(getNode.innerHTML) - 2;
         passingDataSearches[match_val]['score'] -= 2;
+        sendMsg();
+        // sendMsg();
         // negPressed = true;
         // plusPressed = false;
         getNode.negpress = true;
@@ -156,6 +162,7 @@
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
         getNode.innerHTML = Number(getNode.innerHTML) - 1;
         passingDataSearches[match_val]['score'] -= 1;
+        sendMsg();
         // negPressed = true;
         getNode.negpress = true;
         console.log(identifier);
@@ -165,7 +172,8 @@
       else{
         document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
         getNode.innerHTML = Number(getNode.innerHTML) + 1;
-        passingDataSearches[match_val]['score'] == 1;
+        passingDataSearches[match_val]['score'] += 1;
+        sendMsg();
         // negPressed = false;
         getNode.negpress = false;
       }
