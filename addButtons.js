@@ -82,6 +82,12 @@
     tempNode.setAttribute("pospress", false);
     tempNode.setAttribute("negpress", false);
     tempTextNode.innerHTML = score;
+    if (score > 0){
+      h2List[i].childNodes[1].style.color = "green";
+    }
+    else if (score < 0) {
+      h2List[i].childNodes[1].style.color = "red";
+    }
     tempTextNode.style.float = "right";
     tempTextNode.style.width = "30px";
     tempTextNode.style.height = "20px";
