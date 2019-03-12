@@ -19,10 +19,6 @@
 //   // Do something for an error here
 // });
 
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    console.log(request);
-});
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({color: '#3aa757'}, function() {
@@ -38,3 +34,9 @@ chrome.runtime.onInstalled.addListener(function() {
       }]);
     });
 });
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse){
+       console.log(request.package);
+    }
+);

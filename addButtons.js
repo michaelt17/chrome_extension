@@ -35,7 +35,7 @@
   // button.value = "hatelife";
   // console.log(h2List.length);
   for (let i = 0; i < h2List.length; i++){
-  // for (let i = 0; i < 1; i++){     
+  // for (let i = 0; i < 1; i++){
     let score = 0;
 
     // console.log(i);
@@ -132,4 +132,8 @@
     // h2List[i].innerHTML += button;
   }
 
+  chrome.runtime.sendMessage({
+    package: passingDataSearches
+  });
+  
 })();
