@@ -8,6 +8,7 @@ let appDbRefSearches = appDb.ref("searches");
 let appDbRefMappings = appDb.ref("mappings");
 
 
+
 let retVal = null;
 
 appDbRefSearches.on("value", function(snapshot) {
@@ -41,28 +42,15 @@ window.onload = function() {
   initApp();
 };
 
-let changeColor = document.getElementById('changeColor');
 let addButtons = document.getElementById('addButtons');
+addButtons.style.backgroundColor = "green";
+
 //let captureSearch = document.getElementById('captureSearch');
 
 let buttonsAdded = false;
 let inputLog = false;
 
 let rows = [];
-
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-});
-
-changeColor.onclick = function(element) {
-    let color = element.target.value;
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.executeScript(
-          tabs[0].id,
-          {code: 'document.body.style.backgroundColor = "' + color + '";'});
-    });
-  };
 
 // captureSearch.onclick = function(element) {
 // 	//chrome.extension.getBackgroundPage().console.log('input');
