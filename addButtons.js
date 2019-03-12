@@ -44,6 +44,7 @@
       // console.log(metaList[i].childNodes[5].innerHTML.replace(/\s/g, ''));
       // console.log(passingDataMappings[j].replace(/\s/g, ''));
       if (metaList[i].childNodes[5].innerHTML.replace(/\s/g, '') == passingDataMappings[j].replace(/\s/g, '')){
+        //we can use trim here to remove leading whitespace in the innerHTML and compare strings directly instead
         score = passingDataSearches[j]['score'];
         console.log('we have a match');
         break;
@@ -72,6 +73,8 @@
 
     tempTextNode = node.cloneNode();
     tempTextNode.setAttribute("id",'buttonScore' + i);
+    tempNode.setAttribute("pospress", false);
+    tempNode.setAttribute("negpress", false);
     tempTextNode.innerHTML = score;
     tempTextNode.style.float = "right";
     tempTextNode.style.width = "30px";
@@ -80,48 +83,81 @@
     tempNode.onclick = function(){
       let string = "buttonScore" + i;
       let buttonString = 'button' + i;
-      // console.log(string);
+      let buttonStringNeg = 'buttonNeg' + i;
+      let query = document.getElementById('searchTerms').value;
+      let identifier = metaList[i].childNodes[5].textContent.trim()
       let getNode = document.getElementById(string);
       // console.log(getNode.id);
-      if (negPressed){
+      //if(negPressed)
+      if (getNode.negpress){
         document.getElementById(buttonString).style.backgroundColor = "green";
+        document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
         getNode.innerHTML = Number(getNode.innerHTML) + 2;
-        negPressed = false;
-        plusPressed  = true;
+        // negPressed = false;
+        // plusPressed  = true;
+        getNode.negpress = false;
+        getNode.pospress = true;
+        console.log(identifier);
+        console.log(query);
+        console.log("positive press");
       }
-      else if (!plusPressed) {
+      //else if (!plusPressed)
+      else if (!getNode.pospress) {
         document.getElementById(buttonString).style.backgroundColor = "green";
+        document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
         getNode.innerHTML = Number(getNode.innerHTML) + 1;
-        plusPressed  = true;
+        // plusPressed  = true;
+        getNode.pospress = true;
+        console.log(identifier);
+        console.log(query);
+        console.log("positive press");
       }
       else{
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
         getNode.innerHTML = Number(getNode.innerHTML) - 1;
-        plusPressed = false;
+        // plusPressed = false;
+        getNode.pospress = false;
       }
     };
 
     tempNodeNeg.onclick = function(){
       let string = "buttonScore" + i;
+      let buttonString = 'button' + i;
       let buttonStringNeg = 'buttonNeg' + i;
       // console.log(string);
       let getNode = document.getElementById(string);
       // console.log(getNode.id);
-      if (plusPressed){
+      //if (plusPressed)
+      let query = document.getElementById('searchTerms').value;
+      let identifier = metaList[i].childNodes[5].textContent.trim()
+      if (getNode.pospress){
         document.getElementById(buttonStringNeg).style.backgroundColor = "red";
+        document.getElementById(buttonString).style.backgroundColor = "lightgreen";
         getNode.innerHTML = Number(getNode.innerHTML) - 2;
-        negPressed = true;
-        plusPressed = false;
+        // negPressed = true;
+        // plusPressed = false;
+        getNode.negpress = true;
+        getNode.pospress = false;
+        console.log(identifier);
+        console.log(query);
+        console.log("negative press");
       }
-      else if (!negPressed) {
+      //else if (!negPressed)
+      else if (!getNode.negpress) {
         document.getElementById(buttonStringNeg).style.backgroundColor = "red";
+        document.getElementById(buttonString).style.backgroundColor = "lightgreen";
         getNode.innerHTML = Number(getNode.innerHTML) - 1;
-        negPressed = true;
+        // negPressed = true;
+        getNode.negpress = true;
+        console.log(identifier);
+        console.log(query);
+        console.log("negative press");
       }
       else{
         document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
         getNode.innerHTML = Number(getNode.innerHTML) + 1;
-        negPressed = false;
+        // negPressed = false;
+        getNode.negpress = false;
       }
     };
 
