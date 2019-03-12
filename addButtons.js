@@ -28,7 +28,8 @@
     console.log("decreasing score");
   };
 
-
+  let numberMatches = passingDataSearches.length;
+  console.log("numberMatches: ",numberMatches)
 
   // button.syle.width = "50px";
   // button.syle.height = "50px";
@@ -39,6 +40,7 @@
     let score = 0;
     let match_val = -1;
     let hasMatch = false;
+
 
     // console.log(i);
     // console.log(metaList[i].childNodes[5].innerHTML);
@@ -113,8 +115,30 @@
         document.getElementById(buttonString).style.backgroundColor = "green";
         document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
         getNode.innerHTML = Number(getNode.innerHTML) + 1;
-        passingDataSearches[match_val]['score'] += 1;
-        sendMsg();
+
+        if(hasMatch){
+          passingDataSearches[match_val]['score'] += 1;
+          sendMsg();
+        }
+        else{
+          console.log("in else");
+          passingDataMappings.push(identifier);
+
+          passingDataSearches.push({
+            "id": identifier,
+            "score": 1,
+            "title": h2List[i].innerText
+          })
+          // console.log(passingDataMappings);
+          // console.log(passingDataSearches);
+          // console.log(h2List[i].childNodes[1].innerText);
+          hasMatch = true;
+          match_val = numberMatches;
+          numberMatches += 1;
+
+          sendMsg();
+        }
+
         // plusPressed  = true;
         getNode.pospress = true;
         console.log(identifier);
@@ -161,8 +185,24 @@
         document.getElementById(buttonStringNeg).style.backgroundColor = "red";
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
         getNode.innerHTML = Number(getNode.innerHTML) - 1;
-        passingDataSearches[match_val]['score'] -= 1;
-        sendMsg();
+        if(hasMatch){
+          passingDataSearches[match_val]['score'] -= 1;
+          sendMsg();
+        }
+        else{
+          console.log("in else");
+          passingDataMappings.push(identifier);
+
+          passingDataSearches.push({
+            "id": identifier,
+            "score": -1,
+            "title": h2List[i].innerText
+          })
+          // console.log(passingDataMappings);
+          // console.log(passingDataSearches);
+          // console.log(h2List[i].childNodes[1].innerText);
+          sendMsg();
+        }
         // negPressed = true;
         getNode.negpress = true;
         console.log(identifier);
