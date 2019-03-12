@@ -37,6 +37,7 @@
   for (let i = 0; i < h2List.length; i++){
   // for (let i = 0; i < 1; i++){
     let score = 0;
+    let match_val = -1;
 
     // console.log(i);
     // console.log(metaList[i].childNodes[5].innerHTML);
@@ -46,6 +47,7 @@
       if (metaList[i].childNodes[5].innerHTML.replace(/\s/g, '') == passingDataMappings[j].replace(/\s/g, '')){
         //we can use trim here to remove leading whitespace in the innerHTML and compare strings directly instead
         score = passingDataSearches[j]['score'];
+        match_val = j;
         console.log('we have a match');
         break;
       }
@@ -93,6 +95,8 @@
         document.getElementById(buttonString).style.backgroundColor = "green";
         document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
         getNode.innerHTML = Number(getNode.innerHTML) + 2;
+
+        passingDataSearches[match_val]['score'] += 2;
         // negPressed = false;
         // plusPressed  = true;
         getNode.negpress = false;
@@ -106,6 +110,8 @@
         document.getElementById(buttonString).style.backgroundColor = "green";
         document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
         getNode.innerHTML = Number(getNode.innerHTML) + 1;
+        passingDataSearches[match_val]['score'] += 1;
+        sendMsg();
         // plusPressed  = true;
         getNode.pospress = true;
         console.log(identifier);
@@ -115,6 +121,7 @@
       else{
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
         getNode.innerHTML = Number(getNode.innerHTML) - 1;
+        passingDataSearches[match_val]['score'] -= 1;
         // plusPressed = false;
         getNode.pospress = false;
       }
@@ -134,6 +141,7 @@
         document.getElementById(buttonStringNeg).style.backgroundColor = "red";
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
         getNode.innerHTML = Number(getNode.innerHTML) - 2;
+        passingDataSearches[match_val]['score'] -= 2;
         // negPressed = true;
         // plusPressed = false;
         getNode.negpress = true;
@@ -147,6 +155,7 @@
         document.getElementById(buttonStringNeg).style.backgroundColor = "red";
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
         getNode.innerHTML = Number(getNode.innerHTML) - 1;
+        passingDataSearches[match_val]['score'] -= 1;
         // negPressed = true;
         getNode.negpress = true;
         console.log(identifier);
@@ -156,6 +165,7 @@
       else{
         document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
         getNode.innerHTML = Number(getNode.innerHTML) + 1;
+        passingDataSearches[match_val]['score'] == 1;
         // negPressed = false;
         getNode.negpress = false;
       }
@@ -168,8 +178,10 @@
     // h2List[i].innerHTML += button;
   }
 
-  chrome.runtime.sendMessage({
-    package: passingDataSearches
-  });
-  
+function sendMsg(){
+    chrome.runtime.sendMessage({
+      package: {searches: passingDataSearches,
+                mappings: passingDataMappings}
+    });
+  }
 })();
