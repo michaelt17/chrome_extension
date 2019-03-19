@@ -47,13 +47,16 @@
     for (let j = 0; j < passingDataMappings.length; j++){
       // console.log(metaList[i].childNodes[5].innerHTML.replace(/\s/g, ''));
       // console.log(passingDataMappings[j].replace(/\s/g, ''));
-      if (metaList[i].childNodes[5].innerHTML.replace(/\s/g, '') == passingDataMappings[j].replace(/\s/g, '')){
-        //we can use trim here to remove leading whitespace in the innerHTML and compare strings directly instead
-        score = passingDataSearches[j]['score'];
-        match_val = j;
-        hasMatch = true;
-        console.log('we have a match');
-        break;
+      if (metaList[i].childNodes[5].textContent.trim() == passingDataMappings[j]){
+      	let query = document.getElementById('searchTerms').value;
+      	//we can do something right here if we want to denote matching cases but not matching queries
+      	if (query == passingDataSearches[j]['query']) {
+      		score = passingDataSearches[j]['score'];
+        	match_val = j;
+        	hasMatch = true;
+        	console.log('we have a match');
+        	break;
+      	}
       }
     }
 
@@ -133,7 +136,8 @@
           passingDataSearches.push({
             "id": identifier,
             "score": 1,
-            "title": h2List[i].innerText
+            "title": h2List[i].innerText.trim(),
+            "query": query
           })
           // console.log(passingDataMappings);
           // console.log(passingDataSearches);
@@ -202,7 +206,8 @@
           passingDataSearches.push({
             "id": identifier,
             "score": -1,
-            "title": h2List[i].innerText
+            "title": h2List[i].innerText,
+            "query": query
           })
           // console.log(passingDataMappings);
           // console.log(passingDataSearches);
