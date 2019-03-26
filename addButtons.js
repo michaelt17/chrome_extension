@@ -41,22 +41,32 @@
     let match_val = -1;
     let hasMatch = false;
 
+    let query = document.getElementById('searchTerms').value;
+    let new_terms = query.split(" ");
 
+    // console.log(new_terms);
+    // console.log(new_terms.length);
     // console.log(i);
     // console.log(metaList[i].childNodes[5].innerHTML);
     for (let j = 0; j < passingDataMappings.length; j++){
       // console.log(metaList[i].childNodes[5].innerHTML.replace(/\s/g, ''));
       // console.log(passingDataMappings[j].replace(/\s/g, ''));
       if (metaList[i].childNodes[5].textContent.trim() == passingDataMappings[j]){
-      	let query = document.getElementById('searchTerms').value;
+        console.log("is in data mappings");
+        match_val = j;
+        hasMatch = true;
       	//we can do something right here if we want to denote matching cases but not matching queries
-      	if (query == passingDataSearches[j]['query']) {
-      		score = passingDataSearches[j]['score'];
-        	match_val = j;
-        	hasMatch = true;
-        	console.log('we have a match');
-        	break;
-      	}
+
+        for (let k = 0; k < new_terms.length; k++){
+          console.log(new_terms[k]);
+          console.log(score);
+
+          if (new_terms[k] in passingDataSearches[j]['terms']) {
+        		score += Number(passingDataSearches[j]['terms'][new_terms[k]]);
+          	console.log('we have a match');
+        	}
+        }
+
       }
     }
 
@@ -107,9 +117,13 @@
       if (getNode.negpress){
         document.getElementById(buttonString).style.backgroundColor = "green";
         document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
-        getNode.innerHTML = Number(getNode.innerHTML) + 2;
 
-        passingDataSearches[match_val]['score'] += 2;
+        getNode.innerHTML = Number(getNode.innerHTML) + 2*new_terms.length;
+
+        for (let k = 0; k < new_terms.length; k++){
+          passingDataSearches[match_val]['terms'][new_terms[k]] += 2;
+        }
+
         sendMsg();
         // negPressed = false;
         // plusPressed  = true;
@@ -123,21 +137,38 @@
       else if (!getNode.pospress) {
         document.getElementById(buttonString).style.backgroundColor = "green";
         document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
-        getNode.innerHTML = Number(getNode.innerHTML) + 1;
+        getNode.innerHTML = Number(getNode.innerHTML) + new_terms.length;
 
         if(hasMatch){
-          passingDataSearches[match_val]['score'] += 1;
+          console.log("you betcha");
+          for (let k = 0; k < new_terms.length; k++){
+            if ([new_terms[k]] in passingDataSearches[match_val]['terms']){
+              passingDataSearches[match_val]['terms'][new_terms[k]] += 1;
+            }
+            else{
+              passingDataSearches[match_val]['terms'][new_terms[k]] = 1;
+            }
+          }
           sendMsg();
         }
         else{
           console.log("in else");
+
+          let new_dictionary = {};
+          for (let i = 0; i < new_terms.length;i++){
+            console.log("in new dictionary for");
+            new_dictionary[new_terms[i]] = 1;
+          }
+
+          console.log(new_dictionary);
+          console.log(new_terms);
+
           passingDataMappings.push(identifier);
 
           passingDataSearches.push({
             "id": identifier,
-            "score": 1,
+            "terms": new_dictionary,
             "title": h2List[i].innerText.trim(),
-            "query": query
           })
           // console.log(passingDataMappings);
           // console.log(passingDataSearches);
@@ -152,13 +183,15 @@
         // plusPressed  = true;
         getNode.pospress = true;
         console.log(identifier);
-        console.log(query);
+        console.log(new_terms);
         console.log("positive press");
       }
       else{
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
-        getNode.innerHTML = Number(getNode.innerHTML) - 1;
-        passingDataSearches[match_val]['score'] -= 1;
+        getNode.innerHTML = Number(getNode.innerHTML) - new_terms.length;
+        for (let k = 0; k < new_terms.length; k++){
+          passingDataSearches[match_val]['terms'][new_terms[k]] -= 1;
+        }
         sendMsg();
         // plusPressed = false;
         getNode.pospress = false;
@@ -178,8 +211,14 @@
       if (getNode.pospress){
         document.getElementById(buttonStringNeg).style.backgroundColor = "red";
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
-        getNode.innerHTML = Number(getNode.innerHTML) - 2;
-        passingDataSearches[match_val]['score'] -= 2;
+
+        getNode.innerHTML = Number(getNode.innerHTML) - 2*new_terms.length;
+
+
+        for (let k = 0; k < new_terms.length; k++){
+          passingDataSearches[match_val]['terms'][new_terms[k]] -= 2;
+        }
+
         sendMsg();
         // sendMsg();
         // negPressed = true;
@@ -194,9 +233,11 @@
       else if (!getNode.negpress) {
         document.getElementById(buttonStringNeg).style.backgroundColor = "red";
         document.getElementById(buttonString).style.backgroundColor = "lightgreen";
-        getNode.innerHTML = Number(getNode.innerHTML) - 1;
+        getNode.innerHTML = Number(getNode.innerHTML) - new_terms.length;
         if(hasMatch){
-          passingDataSearches[match_val]['score'] -= 1;
+          for (let k = 0; k < new_terms.length; k++){
+            passingDataSearches[match_val]['terms'][new_terms[k]] -= 1;
+          }
           sendMsg();
         }
         else{
@@ -222,8 +263,12 @@
       }
       else{
         document.getElementById(buttonStringNeg).style.backgroundColor = "tomato";
-        getNode.innerHTML = Number(getNode.innerHTML) + 1;
-        passingDataSearches[match_val]['score'] += 1;
+        getNode.innerHTML = Number(getNode.innerHTML) + new_terms.length;
+
+        for (let k = 0; k < new_terms.length; k++){
+          passingDataSearches[match_val]['terms'][new_terms[k]] += 1;
+        }
+
         sendMsg();
         // negPressed = false;
         getNode.negpress = false;
