@@ -6,7 +6,7 @@ Our product is a way to crowd source legal research. By taking a user's search q
 
 The extension is not public at the moment so you will need to install it. Please clone the repo or download the zip file by clicking the green "Clone or download" button at the top of this page.
 
-After installing the files, navigate to (chrome://extensions/) or click the three vertical dots at the top right of the chrome browser, go to "More Tools" and click "Extensions".
+After installing the files, navigate to <chrome://extensions/> or click the three vertical dots at the top right of the chrome browser, go to "More Tools" and click "Extensions".
 
 Click "Load Unpacked", navigate to the directory that contains the chrome extension and select it. The extension should now be in your toolbar up at the top of google chrome!
 
@@ -14,80 +14,12 @@ Click "Load Unpacked", navigate to the directory that contains the chrome extens
 
 Here's how to use the extension:
 
-First, click the refresh symbol and make sure the background page doesn't say (inactive) after background page
+First, click the refresh symbol and make sure the background page doesn't say (inactive) after "background page".
 
-```
-Give examples
-```
+Then, click the details button and scroll down to "Extension Options" and open the link. The page that opens has no content on it, but it is necessary for connecting to firebase.
 
-### Installing
+Next, go to (https://advance.lexis.com/), type in the search query, click on the icon for the Owllex extension, then click on the green button and the interface should pop up!
 
-A step by step series of examples that tell you how to get a development env running
+### Troubleshooting
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+If the button after clicking the extension is white and not green, then you need to reset the extension by clicking the refresh button and reopen the extension options page.
