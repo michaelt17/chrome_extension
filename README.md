@@ -6,7 +6,7 @@ Our product is a way to crowd source legal research. By taking a user's search q
 
 The extension is not public at the moment so you will need to install it. Please clone the repo or download the zip file by clicking the green "Clone or download" button at the top of this page.
 
-After installing the files, navigate to <chrome://extensions/> or click the three vertical dots at the top right of the chrome browser, go to "More Tools" and click "Extensions".
+After installing the files, navigate to chrome://extensions/ or click the three vertical dots at the top right of the chrome browser, go to "More Tools" and click "Extensions".
 
 Click "Load Unpacked", navigate to the directory that contains the chrome extension and select it. The extension should now be in your toolbar up at the top of google chrome!
 
