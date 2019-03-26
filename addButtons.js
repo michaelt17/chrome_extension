@@ -242,17 +242,28 @@
         }
         else{
           console.log("in else");
+
+          let new_dictionary = {};
+          for (let i = 0; i < new_terms.length;i++){
+            console.log("in new dictionary for");
+            new_dictionary[new_terms[i]] = -1;
+          }
+
           passingDataMappings.push(identifier);
 
           passingDataSearches.push({
             "id": identifier,
-            "score": -1,
-            "title": h2List[i].innerText,
-            "query": query
+            "terms": new_dictionary,
+            "title": h2List[i].innerText.trim(),
           })
           // console.log(passingDataMappings);
           // console.log(passingDataSearches);
           // console.log(h2List[i].childNodes[1].innerText);
+
+          hasMatch = true;
+          match_val = numberMatches;
+          numberMatches += 1;
+
           sendMsg();
         }
         // negPressed = true;
