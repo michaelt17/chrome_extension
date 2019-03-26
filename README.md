@@ -4,7 +4,9 @@ Our product is a way to crowd source legal research. By taking a user's search q
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+The extension is not public at the moment so you will need to install it. Please clone the repo or download the zip file by clicking the green "Clone or download" button at the top of this page.
+
+After installing the files, navigate to chrome://extensions/ or click the three vertical dots at the top right of the chrome browser, go to "More Tools" and click "Extensions"
 
 ### Prerequisites
 
