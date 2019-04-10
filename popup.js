@@ -7,7 +7,10 @@ const appDb = app.database();
 let appDbRefSearches = appDb.ref("searches");
 let appDbRefMappings = appDb.ref("mappings");
 
+// printing tab url
+chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 
+});
 
 let retVal = null;
 
@@ -62,6 +65,17 @@ addButtons.onclick = function(element) {
 
   if (!buttonsAdded){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      let onAdvanceLexis = false;
+
+      let currentURL = tabs[0].url;
+      let decidingChar =  currentURL[8];
+
+      // chrome.extension.getBackgroundPage().console.log(currentURL);
+      // chrome.extension.getBackgroundPage().console.log(decidingChar);
+
+      if (decidingChar == 'a'){
+        onAdvanceLexis = true;
+      }
 
       // chrome.tabs.executeScript(
       //     tabs[0].id,
@@ -70,12 +84,23 @@ addButtons.onclick = function(element) {
       var passingDataSearches = retVal;
       var passingDataMappings = retValMappings;
       // chrome.extension.getBackgroundPage().console.log(passingData);
-      chrome.tabs.executeScript(tabs[0].id,
-        {code: 'let passingDataSearches = ' + JSON.stringify(passingDataSearches) +';'
-             + 'let passingDataMappings = ' + JSON.stringify(passingDataMappings) +';'
-             + 'let config = ' + JSON.stringify(config) +';'}, function() {
-          chrome.tabs.executeScript(tabs[0].id, {file: 'addButtons.js'});
-      });
+      if (onAdvanceLexis){
+        chrome.tabs.executeScript(tabs[0].id,
+          {code: 'let passingDataSearches = ' + JSON.stringify(passingDataSearches) +';'
+               + 'let passingDataMappings = ' + JSON.stringify(passingDataMappings) +';'
+               + 'let config = ' + JSON.stringify(config) +';'}, function() {
+            chrome.tabs.executeScript(tabs[0].id, {file: 'addButtons.js'});
+        });
+      }
+      else{
+        chrome.tabs.executeScript(tabs[0].id,
+          {code: 'let passingDataSearches = ' + JSON.stringify(passingDataSearches) +';'
+               + 'let passingDataMappings = ' + JSON.stringify(passingDataMappings) +';'
+               + 'let config = ' + JSON.stringify(config) +';'}, function() {
+            chrome.tabs.executeScript(tabs[0].id, {file: 'addWestLawButtons.js'});
+        });
+      }
+
 
     });
     buttonsAdded = true;
