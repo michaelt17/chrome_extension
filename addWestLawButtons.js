@@ -101,10 +101,10 @@
     tempNode.setAttribute("negpress", false);
     tempTextNode.innerHTML = score;
     if (score > 0){
-      documentTitles[i].childNodes[0].style.color = "green";
+      documentTitles[i].style.color = "green";
     }
     else if (score < 0) {
-      documentTitles[i].childNodes[0].style.color = "red";
+      documentTitles[i].style.color = "red";
     }
     tempTextNode.style.float = "right";
     tempTextNode.style.width = "30px";
