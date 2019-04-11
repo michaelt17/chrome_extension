@@ -19,6 +19,21 @@
 //   // Do something for an error here
 // });
 
+// practice get request for localhost
+
+// let xhr = new XMLHttpRequest();
+//
+// xhr.open("GET", chrome.extension.getURL('https://jsonplaceholder.typicode.com/todos/1'), true);
+// xhr.send();
+//
+// chrome.extension.getBackgroundPage().console.log(typeof xhr);
+// chrome.extension.getBackgroundPage().console.log(xhr);
+// chrome.extension.getBackgroundPage().console.log(String(xhr.responseText));
+// chrome.extension.getBackgroundPage().console.log(xhr.responseText);
+// chrome.extension.getBackgroundPage().console.log( String(xhr.response) );
+// chrome.extension.getBackgroundPage().console.log(xhr.response);
+
+
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({color: '#3aa757'}, function() {

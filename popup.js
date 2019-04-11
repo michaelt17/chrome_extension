@@ -14,6 +14,20 @@ chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 
 let retVal = null;
 
+let groupVal = '';
+
+chrome.runtime.onMessage.addListener(
+    // function(request, sender, sendResponse){
+    //   chrome.storage.sync.get(['group'], function(result) {
+    //         // console.log(result);
+    //         chrome.extension.getBackgroundPage().console.log('Value currently is ' + result['group']);
+    //         groupVal = result['group']
+    //     });
+    // }
+);
+
+
+
 appDbRefSearches.on("value", function(snapshot) {
   retVal = snapshot.val();
   chrome.extension.getBackgroundPage().console.log(snapshot.val());

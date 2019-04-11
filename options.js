@@ -35,6 +35,9 @@ function setGroup(buttonGroup){
   chrome.storage.sync.set({group: buttonGroup}, function() {
         console.log('group is ' + buttonGroup);
       })
+  chrome.runtime.sendMessage({
+    
+  });
 };
 
 function checkGroup(){

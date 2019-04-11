@@ -2,13 +2,13 @@
     "name": "Make Searching Easier",
     "version": "1.0",
     "description": "Adds to legal database websites",
-    "permissions": ["activeTab", "declarativeContent", "storage"],
+    "permissions": ["activeTab", "declarativeContent", "storage","http://*/","https://*/"],
     "options_page": "options.html",
     "background": {
       "scripts": ["background.js"],
       "persistent": false
     },
-    "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'; connect-src 'self' wss://*.firebaseio.com;",
+    "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://jsonplaceholder.typicode.com/ http://localhost:5000/; object-src 'self'; connect-src 'self' http://localhost:5000/ https://jsonplaceholder.typicode.com/ wss://*.firebaseio.com;",
     "page_action": {
       "default_popup": "popup.html",
       "default_icon": {
