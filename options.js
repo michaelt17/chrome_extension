@@ -13,3 +13,19 @@ chrome.runtime.onMessage.addListener(
        appDb.ref("searches").set(request.package["searches"]);
     }
 );
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('button1').addEventListener('click', function() {
+        setGroup("Taxes");
+    });
+    document.getElementById('button2').addEventListener('click', function() {
+        setGroup("Personal Injuries");
+    });
+    document.getElementById('button3').addEventListener('click', function() {
+        setGroup("Corporate");
+    });
+});
+
+function setGroup(buttonNumber){
+  console.log(buttonNumber);
+}
