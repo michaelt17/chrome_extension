@@ -16,15 +16,12 @@ let retVal = null;
 
 let groupVal = '';
 
-chrome.runtime.onMessage.addListener(
-    // function(request, sender, sendResponse){
-    //   chrome.storage.sync.get(['group'], function(result) {
-    //         // console.log(result);
-    //         chrome.extension.getBackgroundPage().console.log('Value currently is ' + result['group']);
-    //         groupVal = result['group']
-    //     });
-    // }
-);
+
+chrome.storage.sync.get(['group'], function(result) {
+      // console.log(result);
+      // chrome.extension.getBackgroundPage().console.log('Value currently is ' + result['group']);
+      groupVal = result['group']
+  });
 
 
 
@@ -76,6 +73,7 @@ let rows = [];
 //   	};
 
 addButtons.onclick = function(element) {
+  chrome.extension.getBackgroundPage().console.log('groupVal is: ' + groupVal);
 
   if (!buttonsAdded){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -102,6 +100,7 @@ addButtons.onclick = function(element) {
         chrome.tabs.executeScript(tabs[0].id,
           {code: 'let passingDataSearches = ' + JSON.stringify(passingDataSearches) +';'
                + 'let passingDataMappings = ' + JSON.stringify(passingDataMappings) +';'
+               + 'let groupVal = ' + groupVal +';'
                + 'let config = ' + JSON.stringify(config) +';'}, function() {
             chrome.tabs.executeScript(tabs[0].id, {file: 'addButtons.js'});
         });
@@ -110,6 +109,7 @@ addButtons.onclick = function(element) {
         chrome.tabs.executeScript(tabs[0].id,
           {code: 'let passingDataSearches = ' + JSON.stringify(passingDataSearches) +';'
                + 'let passingDataMappings = ' + JSON.stringify(passingDataMappings) +';'
+               + 'let groupVal = ' + groupVal +';'
                + 'let config = ' + JSON.stringify(config) +';'}, function() {
             chrome.tabs.executeScript(tabs[0].id, {file: 'addWestLawButtons.js'});
         });

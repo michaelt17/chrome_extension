@@ -56,8 +56,12 @@
     for (let j = 0; j < passingDataMappings.length; j++){
       // console.log(metaList[i].childNodes[5].innerHTML.replace(/\s/g, ''));
       // console.log(passingDataMappings[j].replace(/\s/g, ''));
-      if (metaList[i].childNodes[5].innerText.trim() == passingDataMappings[j]){
+      replacementMeta = metaList[i].childNodes[5].innerText.replace(/\s/g, '');
+      // console.log(replacementMeta);
+      if (replacementMeta == passingDataMappings[j].replace(/\s/g, '')){
         console.log("is in data mappings");
+        console.log(metaList[i].childNodes[5].innerText.replace(/\s/g, ''));
+        console.log(j);
         match_val = j;
         hasMatch = true;
       	//we can do something right here if we want to denote matching cases but not matching queries
@@ -81,8 +85,8 @@
     tempNode.innerHTML = '+';
     tempNode.style.backgroundColor = "lightgreen";
     tempNode.style.borderRadius = "50%";
-    tempNode.style.width = "50px";
-    tempNode.style.height = "50px";
+    tempNode.style.width = "40px";
+    tempNode.style.height = "40px";
     tempNode.style.marginRight = "10px";
     tempNode.style.float = "right";
 
@@ -91,24 +95,33 @@
     tempNodeNeg.innerHTML = '-';
     tempNodeNeg.style.backgroundColor = "tomato";
     tempNodeNeg.style.borderRadius = "50%";
-    tempNodeNeg.style.width = "50px";
-    tempNodeNeg.style.height = "50px";
+    tempNodeNeg.style.width = "40px";
+    tempNodeNeg.style.height = "40px";
     tempNodeNeg.style.float = "right";
 
     tempTextNode = node.cloneNode();
+
     tempTextNode.setAttribute("id",'buttonScore' + i);
     tempNode.setAttribute("pospress", false);
     tempNode.setAttribute("negpress", false);
     tempTextNode.innerHTML = score;
+    tempTextNode.style.border = "solid";
+    tempTextNode.style.textAlign = "center";
+    tempTextNode.style.verticalAlign = "center";
+
     if (score > 0){
       documentTitles[i].style.color = "green";
+      tempTextNode.style.borderColor = "green";
+      tempTextNode.style.color = "green";
     }
     else if (score < 0) {
       documentTitles[i].style.color = "red";
+      tempTextNode.style.borderColor = "red";
+      tempTextNode.style.color = "red";
     }
     tempTextNode.style.float = "right";
     tempTextNode.style.width = "30px";
-    tempTextNode.style.height = "20px";
+    tempTextNode.style.height = "30px";
 
     tempNode.onclick = function(){
       let string = "buttonScore" + i;

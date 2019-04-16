@@ -27,7 +27,7 @@
 // xhr.send();
 //
 // chrome.extension.getBackgroundPage().console.log(typeof xhr);
-// chrome.extension.getBackgroundPage().console.log(xhr);
+// chrome.extension.getBackgroundPage().console.log(Object.values(xhr));
 // chrome.extension.getBackgroundPage().console.log(String(xhr.responseText));
 // chrome.extension.getBackgroundPage().console.log(xhr.responseText);
 // chrome.extension.getBackgroundPage().console.log( String(xhr.response) );

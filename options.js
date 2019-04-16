@@ -17,13 +17,13 @@ chrome.runtime.onMessage.addListener(
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('button1').addEventListener('click', function() {
+    document.getElementById('Taxes').addEventListener('click', function() {
         setGroup("Taxes");
     });
-    document.getElementById('button2').addEventListener('click', function() {
-        setGroup("Personal Injuries");
+    document.getElementById('Personal').addEventListener('click', function() {
+        setGroup("Personal");
     });
-    document.getElementById('button3').addEventListener('click', function() {
+    document.getElementById('Corporate').addEventListener('click', function() {
         setGroup("Corporate");
     });
     document.getElementById('button4').addEventListener('click', function() {
@@ -35,9 +35,22 @@ function setGroup(buttonGroup){
   chrome.storage.sync.set({group: buttonGroup}, function() {
         console.log('group is ' + buttonGroup);
       })
-  chrome.runtime.sendMessage({
-    
-  });
+
+  let dumbButtons = document.getElementsByClassName("dumb-button");
+
+  for (let i = 0; i < dumbButtons.length; i++){
+    if (dumbButtons[i].id == buttonGroup){
+      dumbButtons[i].style.backgroundColor = "green";
+    }
+    else{
+      dumbButtons[i].style.backgroundColor = "lightgreen";
+    }
+  }
+  // document.getElementById('Personal').style.backgroundColor = "lightgreen"
+  // document.getElementById('Corporate').style.backgroundColor = "lightgreen"
+  // document.getElementById('Taxes').style.backgroundColor = "lightgreen"
+
+
 };
 
 function checkGroup(){
