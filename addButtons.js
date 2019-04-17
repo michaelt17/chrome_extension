@@ -1,4 +1,5 @@
 (function() {
+  console.log(groupVal);
   console.log(passingDataSearches);
   console.log(passingDataMappings);
 

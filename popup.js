@@ -98,18 +98,18 @@ addButtons.onclick = function(element) {
       // chrome.extension.getBackgroundPage().console.log(passingData);
       if (onAdvanceLexis){
         chrome.tabs.executeScript(tabs[0].id,
-          {code: 'let passingDataSearches = ' + JSON.stringify(passingDataSearches) +';'
+          {code: 'let groupVal = ' + JSON.stringify(groupVal) +';'
+               + 'let passingDataSearches = ' + JSON.stringify(passingDataSearches) +';'
                + 'let passingDataMappings = ' + JSON.stringify(passingDataMappings) +';'
-               + 'let groupVal = ' + groupVal +';'
                + 'let config = ' + JSON.stringify(config) +';'}, function() {
             chrome.tabs.executeScript(tabs[0].id, {file: 'addButtons.js'});
         });
       }
       else{
         chrome.tabs.executeScript(tabs[0].id,
-          {code: 'let passingDataSearches = ' + JSON.stringify(passingDataSearches) +';'
+          {code: 'let groupVal = ' + JSON.stringify(groupVal) +';'
+               + 'let passingDataSearches = ' + JSON.stringify(passingDataSearches) +';'
                + 'let passingDataMappings = ' + JSON.stringify(passingDataMappings) +';'
-               + 'let groupVal = ' + groupVal +';'
                + 'let config = ' + JSON.stringify(config) +';'}, function() {
             chrome.tabs.executeScript(tabs[0].id, {file: 'addWestLawButtons.js'});
         });

@@ -1,5 +1,6 @@
 (function() {
-  console.log("In westLaw Buttons")
+  // console.log(groupVal);
+  console.log("In westLaw Buttons");
   console.log(passingDataSearches);
   console.log(passingDataMappings);
 
